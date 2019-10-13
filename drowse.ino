@@ -18,11 +18,7 @@ void setup()
   Serial.begin(9600); 
   bci.begin(BAUDRATE);           // USB
   pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(6,OUTPUT);
-}
+ }
 
 byte ReadOneByte()           // One Byte Read Function
 {
@@ -53,16 +49,14 @@ void loop()                     // Main Function
             payloadData[i]     = ReadOneByte();      //Read payload into memory
             generatedchecksum  += payloadData[i] ;
           } 
-          generatedchecksum = 255 - generatedchecksum;
-          checksum  = ReadOneByte();
-        
+                 
           if(checksum == generatedchecksum)        // Varify Checksum
           {             
             if (payloadData[28]==4)
             { 
               if (j<4)
                {
-                 Attention [k] = payloadData[29];
+                
                  Temp += Attention [k];
                  j++;
                }
@@ -73,14 +67,7 @@ void loop()                     // Main Function
                  Serial.println(Att_Avg);
                  if (Att_Avg<50)
                  {
-                      digitalWrite(8, HIGH);
-                     digitalWrite(9, LOW);
-                     delay(5000);                   
-                  
-                 }
-                 else
-                 {
-                   digitalWrite(8, LOW);
+                     digitalWrite(8, LOW);
                      digitalWrite(9, HIGH);
                      delay(5000);
                  }
